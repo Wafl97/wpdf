@@ -1,0 +1,462 @@
+CHAPTER 3.
+
+6
+
+ANALYSIS
+
+Event-Driven
+Taking an
+
+Event-Driven approach to an API ips the responsibility to make
+
+the server for updating the client when information is changed and so when an
+update is necessary. This means that the server is not processing unnecessary
+request and save resources by this.
+
+Websocket
+When there is a need to send data to and from both the client and the server,
+it is possible to send request every time. However, this is very wasteful, and
+can cause big delays in the code execution. A better way to do this is by using
+
+Websockets [6]. These allow for long-lived connections between the client and
+
+server, where both can transmit data over. So rather than establishing a new
+connection each time and closing it again, it will just keep it open for the
+entire duration when it is needed.
+
+This connection then allows for two-way
+
+communication.
+
+ServerSentEvent
+Server Sent Event or SSE [7], is a technique where the client can subscribe to
+a server and listen for incoming requests from the server. The server can send
+these requests based on dierent events in the server itself or from external
+actors. By using this technique, it is possible to make the client update itself
+without calling the server periodically, this saves both time and resources.
+
+Webhook
+Webhooks [4] are a way of providing a callback from the client to the server.
+The client is the one initiating the process, but rather than wait for the server
+to nish processing the request, it can continue running.
+
+When the server
+
+then nishes processing the request, it can call the callback address with the
+result of the request.
+
+The client can then update itself with the new data.
+
+This technique requires that both parties are capable of sending and receiving
+requests.
+
+3.3 Databases
+Each microservice in a microservice architecture system, will, if needed, have
+its own database.
+
+This should also be reected in the design tool.
+
+There
+
+are dierent types of databases, each with their own use cases. This means
+choosing the best one is based on what and how the data will be stored and
+used.
+
+CHAPTER 3.
+
+7
+
+ANALYSIS
+
+SQL
+Perhaps the most common type of database, is the relational database. This
+type uses a strict schema for the data, where the attributes and relationships
+between data is dened. Relational databases use Structured Query Language
+(SQL) [2] to create these schemas. SQL is also, as the name implies, used to
+query the database.
+
+NoSQL
+Not Only SQL or NoSQL [1] refers to any database with implementations different from relational databases. There are many dierent NoSQL databases,
+but for this section, we will only look at a few.
+
+Document
+It might not always be necessary to have a strict structure to the data we
+want to store. It might be dierent from entry to entry, or we might expect it
+to change over time.
+
+Document [1] databases solve this by storing entries as
+
+individual documents, these will typically be using some common format, like
+JSON or XML. A key aspect of this database type is that it is schemaless.
+
+Key-Value
+This type of database is very similar to using a Map data-structure in code,
+the main dierence is that a
+
+key-value [1] database, will have persistence. So,
+
+this type is very useful for storing data with no relation, where we always want
+to make queries based on some unique identier.
+
+Graph
+We can have times where we are more interested in how the data is related,
+than the actual data itself. In a
+
+Graph [1] database is the data structured into
+
+a graph where the data is represented as nodesa and the relationships between
+data is represented as edges in the graph. It is then possible to make queries
+based on these relationships.
+
+3.4 Requirements
+From the previous sections we found the requirement for the system, this
+includes both
+
+functional and non-functional requirement. All requirements
+
+are placed into one of the two categories and are prioritized based on the
+
+MoSCoW method. Where must-have requirement are part of the project
+MVP, this means that these requirements must be implemented to consider
+the project a success. The should-have requirements are next in line, when
+
+CHAPTER 3.
+
+ANALYSIS
+
+8
+
+MVP is complete, and will be implemented if there is time. All couldhave are requirements are 'nice-to-have', and would make the overall product
+more complete, but are not essential or important. The would-have or wishto-have requirements are completely out of the scope of the project. To keep
+this section short and clear, only the must requirements are listed below, the
+the
+
+full list of requirements can be found in appendix A.
+
+CHAPTER 3.
+
+9
+
+ANALYSIS
+
+Functional Requirements
+ID
+
+Name
+
+Description
+
+F-01
+
+Generate Microservice
+
+F-01.1
+
+Specify Language
+
+F-01.2
+
+Specify Database
+
+F-01.3
+
+Specify API
+
+F-01.3.A
+
+Specify
+
+It
+
+Endpoints
+
+must be possible to select the type of API
+
+/
+
+It
+
+must be possible to dene dierent end-
+
+points/methods for the API chosen for the microservice
+The service
+
+F-03
+
+Collaboration
+
+F-03.1
+
+Organisations
+
+F-03.1.A
+
+Create Organisation
+
+F-03.1.B
+
+Invite User
+
+F-03.2
+
+Projects
+
+F-03.2.A
+
+Create Project
+
+F-03.3
+
+Services
+
+must provide a tool for designing
+
+microservices
+Users
+
+must be able to collaborate on their
+
+work with other users
+Users
+
+must be able work with dierent organ-
+
+isations
+Users
+
+must be able to create organisations for
+
+their work
+Users
+
+must be able to invite other users to
+
+organisations
+Organisations
+
+must be able to contain dier-
+
+ent projects
+Users
+
+must be able to create project under the
+
+dierent organisations they are assigned to
+Projects
+vices
+
+F-03.3.A
+
+Create Service
+
+F-04
+
+Admin access
+new
+
+Users
+
+must be able to contain dierent ser-
+
+must be able to create services under
+
+the dierent projects that are assigned to
+These
+
+must be way for admin users to access
+
+the system
+admin
+
+users
+Create service credentials
+
+must be possible to select the database of
+
+the microservice
+
+for the microservice
+
+Designer
+
+F-04.2
+
+must be possible to select the language of
+
+the microservice
+
+Methods
+
+Create
+
+must be able to generate mi-
+
+croservice
+It
+
+It
+
+F-02
+
+F-04.1
+
+The system
+
+This admin access
+
+must have a way to add
+
+new admin users to the system.
+This admin access
+
+must have a way for ad-
+
+mins to create new credentials that extension
+services need
+
+CHAPTER 3.
+
+10
+
+ANALYSIS
+
+Non-Functional Requirements
+ID
+
+Name
+
+NF-01
+
+Extendibility
+
+NF-01.1
+
+Service Standard
+
+NF-02
+
+Security
+
+Description
+It
+
+must be easy to add new generation services
+
+to the system
+Generation services
+
+must follow a specica-
+
+tion standard
+The system
+
+must implement measures to en-
+
+sure that only authorized users can the resources that they are approved for
+
+NF-05
+
+Diagnostics
+
+NF-06
+
+Logging
+
+The system
+
+must contain come method of
+
+self-Diagnostics
+The system
+
+must keep a log of actions per-
+
+formed by users and services
+
+3.5 Microservices
+From the requirement we can see a number of concerns that needs to be addressed.
+
+Dierent microservice will be made to handle each major concern.
+
+The rst microservice we can see we will need is an
+
+AuthenticationService,
+
+to handle the authentication of requirements from outside the system. We will
+need a microservice to handle the data generated by end-users, this service
+will be called
+
+UserService. A core part of the system will be adding new
+
+microservices that can generate code, we need a microservice to hanlde the
+registration of these new services, this service will be the
+
+RegisterService.
+LoggingSer-
+
+To keep logs of user actions and system event, we will need a
+
+vice. Users will need to be notied on some user actions and system event,
+NoticationService. Lastly we have a need for a
+
+this will be handles by a
+
+microservice to reect on the system and check its health, this job will be
+performed be a
+
+DiagnosticsService.
+
+To get an overview of the system and the dierent microservices, we will
+analyses each of the microservice and dene a contract for each.
+
+This con-
+
+tract will contain a short description of what the service will do, a list of the
+responsibilities, and a list of the other microservices that it is expected to
+communicate with.
+
+AuthenticationService
+We have a need for some parts of the system that is protected behind some
+Security, where only authorised user has access. For this purpose, we will need
+a microservice that the other microservices in the system can call to handle
+the authorisation.
+
+CHAPTER 3.
+
+11
+
+ANALYSIS
+
+MICROSERVICE CONTRACT
+Name
+
+Service ID
+
+Service Manager
+
+AuthenticationService
+
+S-0
+
+Marc Bertelsen
+
+Description
+
+This service will handle all system authentication, by generating and validating
+tokens, based on credentials.
+
+Responsibilities
+
+ Generate tokens
+ Validate tokens
+
+Connections
+ LoggingService (ID: S-3)
+
+UserService
+There is a need for a microservice to store data provided by users. The data
+stored by this microservice will have dierent user roles associated with it.
+These roles must also be enforced by this service to limit the access of some
+resources.
+
+
